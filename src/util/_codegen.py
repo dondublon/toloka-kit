@@ -11,6 +11,7 @@ import inspect
 import linecache
 import uuid
 from inspect import isclass, signature, Signature, Parameter, BoundArguments
+from importlib.metadata import version
 from textwrap import dedent, indent
 from typing import Any, Callable, Dict, List, Optional, Tuple, Type
 
@@ -357,7 +358,7 @@ def fix_attrs_converters(cls):
     This decorator brings this feature to older attrs versions.
     """
 
-    if attr.__version__ < '21.0.3':
+    if version('attrs') < '21.0.3':
         fields_dict = attr.fields_dict(cls)
 
         def update_param_from_converter(param):
